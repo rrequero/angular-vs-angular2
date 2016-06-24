@@ -1,0 +1,38 @@
+<div class="col-md-6">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>
+                Nombre
+            </label>
+            <input type="text" ngControl="name" [(ngModel)]="user.name" required minlength="4" class="form-control" #name="ngForm" />
+            <div [hidden]="!name.errors || !name.errors.required " class="alert alert-danger">
+                Nombre obligatorio
+            </div>
+            <div *ngIf="name.errors && name.errors.minlength" class="alert alert-danger">
+                Introduzca minimo {{name.errors.minlength.requiredLength }} carácteres
+            </div>
+        </div>
+        <div class="form-group">
+            <label>
+                Trabajo
+            </label>
+            <select [(ngModel)]="user.job" required class="form-control" ngControl="job" #job="ngForm">
+                <option *ngFor="let job of jobs" [ngValue]="job">{{job}}</option>
+            </select>
+            <div [hidden]="!job.errors || !job.errors.required " class="alert alert-danger">
+                Trabajo obligatorio
+            </div>
+        </div>
+        <div class="form-group">
+            <label>
+                Fecha de nacimiento
+            </label>
+            <input type="date" [(ngModel)]="user.birthdate" required class="form-control" ngControl="birthdate" #birthdate="ngForm" />
+            <div [hidden]="!birthdate.errors || !birthdate.errors.required " class="alert alert-danger">
+                Fecha de nacimiento obligatoria
+            </div>
+        </div>
+            <input type="submit" value="Guardar" [disabled]="!userForm.form.valid" />
+
+    </form>
+    </div>

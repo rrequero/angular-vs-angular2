@@ -1,0 +1,34 @@
+<div class="col-md-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Trabajo
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let user of users; let odd = odd; let even = even " [ngClass]="{odd: odd, even: even}" (click)="selectUser(user)">
+                    <td>{{user.name | cut:4}}</td>
+                    <td>{{user.job}}</td>
+                    <td>{{user.birthdate | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <a [routerLink]="['UserEdit', {id: user.id}]">Editar</a>
+                        <button type="button" (click)="editUser(user.id)">Editar</button>
+                        <button type="button" (click)="removeUser(user)">Borrar</button>
+                    </td>
+                </tr>
+        </tbody>
+
+    </table>
+</div>
+<div class="col-md-6">
+    <user-detail [user]="selectedUser" (closePanel)="selectedUser = null" *ngIf="selectedUser"></user-detail>
+</div>
