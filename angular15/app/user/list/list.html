@@ -1,0 +1,34 @@
+<div class="col-md-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Trabajo
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr ng-repeat="user in listCtrl.users " ng-class="{odd: $odd, even: $even}" ng-click="listCtrl.selectUser(user)">
+                <td>{{user.name}}</td>
+                <td>{{user.job}}</td>
+                <td>{{user.birthdate | date:'dd/MM/yyyy'}}</td>
+                <td>
+                    <a ui-sref="app.user.edit({id: user.id})">Editar</a>
+                    <button type="button" ng-click="listCtrl.editUser(user.id)">Editar</button>
+                    <button type="button" ng-click="listCtrl.removeUser(user)">Borrar</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+<div class="col-md-6">
+    <user-detail user="listCtrl.selectedUser" close-panel="listCtrl.selectedUser=null" ng-if="listCtrl.selectedUser"></user-detail>
+</div>
